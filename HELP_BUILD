@@ -1,0 +1,185 @@
+Install the project...
+-- Install configuration: "Debug"
+-- Installing: /usr/local/lib/libraylib.a
+-- Installing: /usr/local/include/raylib.h
+-- Installing: /usr/local/include/rcamera.h
+-- Installing: /usr/local/include/rlgl.h
+-- Installing: /usr/local/include/raymath.h
+-- Installing: /usr/local/lib/pkgconfig/raylib.pc
+-- Installing: /usr/local/lib/cmake/raylib/raylib-config-version.cmake
+-- Installing: /usr/local/lib/cmake/raylib/raylib-config.cmake
+
+
+
+
+-----------
+
+[ 97%] Built target text_font_sdf
+[ 98%] Built target audio_module_playing
+[ 99%] Built target text_format_text
+[ 99%] Built target text_input_box
+[100%] Built target text_rectangle_bounds
+Install the project...
+-- Install configuration: "Debug"
+-- Installing: /home/cnc/emsdk/upstream/emscripten/cache/sysroot/lib/libraylib.a
+-- Installing: /home/cnc/emsdk/upstream/emscripten/cache/sysroot/include/raylib.h
+-- Installing: /home/cnc/emsdk/upstream/emscripten/cache/sysroot/include/rcamera.h
+-- Installing: /home/cnc/emsdk/upstream/emscripten/cache/sysroot/include/rlgl.h
+-- Installing: /home/cnc/emsdk/upstream/emscripten/cache/sysroot/include/raymath.h
+-- Installing: /home/cnc/emsdk/upstream/emscripten/cache/sysroot/lib/pkgconfig/raylib.pc
+-- Installing: /home/cnc/emsdk/upstream/emscripten/cache/sysroot/lib/cmake/raylib/raylib-config-version.cmake
+-- Installing: /home/cnc/emsdk/upstream/emscripten/cache/sysroot/lib/cmake/raylib/raylib-config.cmake
+cnc@debian:~/Desktop/B2/raylib$ 
+
+
+
+
+
+sudo apt install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev \
+libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev \
+build-essential cmake make g++ \
+freeglut3-dev libglfw3 libglfw3-dev
+
+
+
+
+mkdir -p ~/libs && cd ~/libs
+git clone https://github.com/webgpu-native/webgpu-headers.git
+cd webgpu-headers
+sudo cp webgpu.h /usr/local/include/
+
+
+
+
+cd
+git clone https://github.com/emscripten-core/emsdk .emsdk
+cd emsdk
+git pull
+./emsdk install latest
+./emsdk activate latest
+echo 'source "$HOME/.emsdk/emsdk_env.sh" 2>/dev/null >> ~/.bashrc
+exec $SHELL
+
+
+
+
+source ~/emsdk/emsdk_env.sh
+
+make -f Makefile.emscripten
+
+
+
+-I ~/emsdk/upstream/emscripten/system/include
+
+
+
+
+--------
+
+em++ -o game.html main.cpp -Os -Wall -I ~/.emsdk/upstream/emscripten/cache/sysroot/include \
+-L ~/.emsdk/upstream/emscripten/cache/sysroot/lib/libraylib.a -s USE_GLFW=3 -s ASYNCIFY \
+--shell-file shell.html -DPLATFORM_WEB ~/.emsdk/upstream/emscripten/cache/sysroot/lib/libraylib.a
+
+
+
+
+/home/cnc/emsdk/upstream/emscripten/cache/sysroot/lib/libraylib.a
+/home/cnc/emsdk/upstream/emscripten/cache/sysroot/include/
+
+
+-----------
+
+
+
+em++ -o game.html main.cpp -Os -Wall -I /home/cnc/emsdk/upstream/emscripten/cache/sysroot/include \
+-L /home/cnc/emsdk/upstream/emscripten/cache/sysroot/lib -lraylib -s USE_GLFW=3 -s ASYNCIFY \
+--shell-file shell.html -DPLATFORM_WEB
+
+
+
+
+# MAKE PLAN
+make -f Makefile.emscripten
+
+
+
+
+
+
+
+LAST
+
+
+rm -rf /tmp/emscripten_temp_oy_p3yfv
+em++ -o game.html main.cpp -Os -Wall -I /home/cnc/emsdk/upstream/emscripten/cache/sysroot/include \
+-L /home/cnc/emsdk/upstream/emscripten/cache/sysroot/lib -lraylib -s USE_GLFW=3 -s ASYNCIFY \
+--shell-file shell.html -DPLATFORM_WEB
+
+
+
+
+ em++ -o game.html main.cpp -Os -Wall -I /home/cnc/emsdk/upstream/emscripten/cache/sysroot/include -L /home/cnc/emsdk/upstream/emscripten/cache/sysroot/lib -lraylib -s USE_GLFW=3 -s ASYNCIFY --shell-file shell.html -DPLATFORM_WEB
+
+
+
+
+emrun --port 8000 game.html
+
+
+
+cnc@debian:~/Desktop/T4/cmake/build/WEB$ sudo netstat -tuln | grep :8000
+[sudo] password for cnc: 
+tcp        0      0 0.0.0.0:8000            0.0.0.0:*               LISTEN     
+cnc@debian:~/Desktop/T4/cmake/build/WEB$ sudo lsof -i :8000
+COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+python3 45537  cnc    3u  IPv4 189744      0t0  TCP *:8000 (LISTEN)
+cnc@debian:~/Desktop/T4/cmake/build/WEB$ 
+cnc@debian:~/Desktop/T4/cmake/build/WEB$ 
+cnc@debian:~/Desktop/T4/cmake/build/WEB$ 
+cnc@debian:~/Desktop/T4/cmake/build/WEB$ sudo kill -9 45537
+
+
+
+
+
+
+
+
+
+
+
+cnc@debian:~$ sudo netstat -tuln
+[sudo] password for cnc: 
+sudo: netstat: command not found
+cnc@debian:~$ 
+
+
+
+
+
+
+
+
+
+em++ -o game.html main.cpp -Os -Wall -I /home/cnc/emsdk/upstream/emscripten/cache/sysroot/include -L /home/cnc/emsdk/upstream/emscripten/cache/sysroot/lib -lraylib -s USE_GLFW=3 -s ASYNCIFY --shell-file shell.html -DPLATFORM_WEB
+
+
+ctrl+C
+
+em++ -o game.html main.cpp -Os -Wall -I /home/cnc/emsdk/upstream/emscripten/cache/sysroot/include -L /home/cnc/emsdk/upstream/emscripten/cache/sysroot/lib -lraylib -s USE_GLFW=3 -s ASYNCIFY --shell-file shell.html -DPLATFORM_WEB --preload-file resources
+
+
+
+
+
+#sample
+em++ -o game.html main.cpp -Os -Wall -I/path/to/emscripten/cache/sysroot/include \
+-L/path/to/emscripten/cache/sysroot/lib -lraylib -s USE_GLFW=3 -s ASYNCIFY \
+--shell-file shell.html --preload-file resources
+
+
+
+
+
+
+
