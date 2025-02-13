@@ -80,8 +80,8 @@ int main(void)
                  float wallHeight = 3.0f;  // Height of the wall
                  
                  // Calculate the portion of the texture to use
-                 float textureCoordX = textureWidth * (wallWidth / 1.0f);  // Mapping 5 width within a 10-unit texture scale
-                 float textureCoordY = textureHeight * (wallHeight / 1.0f); // Mapping 5 height within a 10-unit texture scale
+                 float textureCoordX = textureWidth * (wallWidth / 2.0f);  // Mapping 5 width within a 10-unit texture scale
+                 float textureCoordY = textureHeight * (wallHeight / 2.0f); // Mapping 5 height within a 10-unit texture scale
                  
                  // Apply the calculated texture area to the wall
                  DrawCubeTextureRec(texture, 

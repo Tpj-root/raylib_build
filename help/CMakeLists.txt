@@ -12,6 +12,8 @@ set(RAYLIB_LIB_DIR "${LIB_HOME}/raylib/libraylib.a")
 # List of source files
 set(EXAMPLES
     wall.c
+    models_loading.c
+    models_yaw_pitch_roll.c
 )
 
 # Loop through the examples and create an executable for each one
@@ -35,11 +37,11 @@ foreach(EXAMPLE ${EXAMPLES})
         ${CMAKE_BINARY_DIR}/resources
     )
 
-    # Automatically run executable after build
-    add_custom_command(
-        TARGET ${EXE_NAME}
-        POST_BUILD
-        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${EXE_NAME}
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    )
+    ## Automatically run executable after build
+    #add_custom_command(
+    #    TARGET ${EXE_NAME}
+    #    POST_BUILD
+    #    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${EXE_NAME}
+    #    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    #)
 endforeach()
