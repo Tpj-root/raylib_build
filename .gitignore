@@ -1,5 +1,9 @@
 # Ignore files without an extension
-*.[^/]*$
+#*.[^/]*$
+
+# Ignore files without an extension in all subdirectories
+**/*.[^/]*$
+
 
 # Ignore the following directories
 help/build/
