@@ -1,3 +1,6 @@
+# Ignore files without an extension
+*.[^/]*$
+
 # Ignore the following directories
 help/build/
 
