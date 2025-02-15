@@ -1,7 +1,7 @@
 #include "raylib.h"
 
 int main() {
-    InitWindow(800, 600, "Draw Line 3D");
+    InitWindow(800, 600, "Draw Point 3D");
     Camera3D camera = { 0 };
     camera.position = (Vector3){ 10.0f, 10.0f, 10.0f };
     camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
@@ -14,10 +14,10 @@ int main() {
         ClearBackground(RAYWHITE);
         
         BeginMode3D(camera);
-        DrawLine3D((Vector3){ -5, 0, 0 }, (Vector3){ 5, 5, 5 }, RED);
+        DrawPoint3D((Vector3){ 0, 0, 0 }, RED);  // Draw a small point at the origin
         EndMode3D();
         
-        DrawText("3D Line Example", 10, 10, 20, BLACK);
+        DrawText("3D Point Example", 10, 10, 20, BLACK);
         EndDrawing();
     }
 

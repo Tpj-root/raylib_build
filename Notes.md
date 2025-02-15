@@ -248,6 +248,25 @@ DrawGrid(10, 2.0f);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Plan_3d view to 2d camera view how work ???
 
 
@@ -320,5 +339,77 @@ Up {0.0f, 0.0f, -1.0f} → Aligns the camera correctly for a top-down view.
 
 
 
+
+
+
+
+
+| Feature             | DrawCube | DrawMesh(GenMeshCube) |
+|---------------------|---------|----------------------|
+| Easy to Use        | ✅ Yes  | ❌ Requires setup  |
+| Performance        | ✅ Fast (built-in) | 🚀 Optimized for models |
+| Customizable       | ❌ No   | ✅ Yes (edit vertices, UVs, etc.) |
+| Uses Materials     | ❌ No   | ✅ Yes |
+| Apply Transformations | ❌ Limited | ✅ Full Matrix control |
+
+
+
+
+
+
+
+How Heightmaps Work
+
+A heightmap is a grayscale image where pixel intensity represents elevation:
+
+    Black (0,0,0) = Lowest elevation.
+    White (255,255,255) = Highest elevation.
+    Shades of gray = Different heights in between.
+    
+    
+Can I Use Google Maps for Heightmaps?
+
+Yes, but Google Maps images alone are not heightmaps because:
+
+    Satellite images show colors, not elevation.
+    You need elevation data (DEM - Digital Elevation Model).
+    
+How to Create a Heightmap from Google Maps
+1️⃣ Download Elevation Data
+
+    Use NASA SRTM, ASTER, or Google Earth Pro to get grayscale elevation maps.
+    Websites:
+        🌍 https://dwtkns.com/srtm/ (NASA SRTM Data)
+        🌍 https://earthexplorer.usgs.gov/ (USGS Earth Explorer)
+        
+        
+
+
+Convert to a Heightmap
+
+If you only have a colored map (e.g., from Google Maps), convert it:
+
+    Open in GIMP
+    Convert to Grayscale (Image → Mode → Grayscale).
+    Adjust Brightness & Contrast (Image → Adjustments → Levels).
+    Save as PNG (no color, only black & white).
+    
+    
+    
+A grayscale image uses 256 different shades (0–255), where:
+
+    0 (Black) → Lowest height (valleys).
+    255 (White) → Highest height (mountains).
+    1–254 (Gray levels) → Intermediate heights.
+
+Each pixel in a 8-bit grayscale image has one of 256 values, meaning 256 possible height levels for your terrain.
+
+For higher precision, use 16-bit grayscale (0–65535 levels).
+
+
+
+
+
+https://www.researchgate.net/publication/241680673_GPU-based_Conformal_Flow_on_Surfaces
 
 
