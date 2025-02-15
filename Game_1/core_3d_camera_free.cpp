@@ -1,88 +1,143 @@
-/*******************************************************************************************
-*
-*   raylib [core] example - Initialize 3d camera free
-*
-*   Example complexity rating: [★☆☆☆] 1/4
-*
-*   Example originally created with raylib 1.3, last time updated with raylib 1.3
-*
-*   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
-*   BSD-like license that allows static linking with closed source software
-*
-*   Copyright (c) 2015-2025 Ramon Santamaria (@raysan5)
-*
-********************************************************************************************/
-
 #include "raylib.h"
+#include <stdio.h> // For sprintf
 
-//------------------------------------------------------------------------------------
-// Program main entry point
-//------------------------------------------------------------------------------------
+void DrawColoredCube(Vector3 position, float size) {
+    Vector3 v0 = { position.x - size/2, position.y - size/2, position.z - size/2 };
+    Vector3 v1 = { position.x + size/2, position.y - size/2, position.z - size/2 };
+    Vector3 v2 = { position.x + size/2, position.y + size/2, position.z - size/2 };
+    Vector3 v3 = { position.x - size/2, position.y + size/2, position.z - size/2 };
+    Vector3 v4 = { position.x - size/2, position.y - size/2, position.z + size/2 };
+    Vector3 v5 = { position.x + size/2, position.y - size/2, position.z + size/2 };
+    Vector3 v6 = { position.x + size/2, position.y + size/2, position.z + size/2 };
+    Vector3 v7 = { position.x - size/2, position.y + size/2, position.z + size/2 };
+
+    // Front face (Red)
+    DrawTriangle3D(v0, v1, v2, RED);
+    DrawTriangle3D(v0, v2, v3, RED);
+
+    // Back face (Blue)
+    DrawTriangle3D(v4, v5, v6, BLUE);
+    DrawTriangle3D(v4, v6, v7, BLUE);
+
+    // Left face (Green)
+    DrawTriangle3D(v0, v3, v7, GREEN);
+    DrawTriangle3D(v0, v7, v4, GREEN);
+
+    // Right face (Yellow)
+    DrawTriangle3D(v1, v5, v6, YELLOW);
+    DrawTriangle3D(v1, v6, v2, YELLOW);
+
+    // Top face (White)
+    DrawTriangle3D(v3, v2, v6, GRAY);
+    DrawTriangle3D(v3, v6, v7, GRAY);
+
+    // Bottom face (Orange)
+    DrawTriangle3D(v0, v1, v5, ORANGE);
+    DrawTriangle3D(v0, v5, v4, ORANGE);
+}
+
+
+
+
+void DrawSolidColoredCube(Vector3 position, float size) {
+    // Define colors for each face
+    Color frontColor = RED;
+    Color backColor = BLUE;
+    Color leftColor = GREEN;
+    Color rightColor = YELLOW;
+    Color topColor = WHITE;
+    Color bottomColor = ORANGE;
+
+    // Draw the solid cube
+    DrawCubeV(position, (Vector3){ size, size, size }, WHITE); // Base cube
+    DrawCubeWiresV(position, (Vector3){ size, size, size }, BLACK); // Outline
+
+    // Draw colored faces
+    DrawCubeV((Vector3){ position.x, position.y, position.z - size/2 }, (Vector3){ size, size, 0.01f }, frontColor);  // Front
+    DrawCubeV((Vector3){ position.x, position.y, position.z + size/2 }, (Vector3){ size, size, 0.01f }, backColor);   // Back
+    DrawCubeV((Vector3){ position.x - size/2, position.y, position.z }, (Vector3){ 0.01f, size, size }, leftColor);   // Left
+    DrawCubeV((Vector3){ position.x + size/2, position.y, position.z }, (Vector3){ 0.01f, size, size }, rightColor);  // Right
+    DrawCubeV((Vector3){ position.x, position.y + size/2, position.z }, (Vector3){ size, 0.01f, size }, topColor);    // Top
+    DrawCubeV((Vector3){ position.x, position.y - size/2, position.z }, (Vector3){ size, 0.01f, size }, bottomColor); // Bottom
+
+    // Draw 3x3 grid lines on the front face
+    float step = size / 3;
+    for (int i = -1; i <= 1; i++) {
+        Vector3 v1 = { position.x - size / 2, position.y + step * i, position.z - size / 2 };
+        Vector3 v2 = { position.x + size / 2, position.y + step * i, position.z - size / 2 };
+        Vector3 v3 = { position.x + step * i, position.y - size / 2, position.z - size / 2 };
+        Vector3 v4 = { position.x + step * i, position.y + size / 2, position.z - size / 2 };
+
+        DrawLine3D(v1, v2, BLACK); // Horizontal lines
+        DrawLine3D(v3, v4, BLACK); // Vertical lines
+    }
+}
+
+
+
+
+
 int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
     const int screenWidth = 800;
     const int screenHeight = 450;
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - 3d camera free");
+    InitWindow(screenWidth, screenHeight, "raylib [core] example - 3D camera free");
 
-    // Define the camera to look into our 3d world
     Camera3D camera = { 0 };
-    camera.position = (Vector3){ 10.0f, 10.0f, 10.0f }; // Camera position
+    camera.position = (Vector3){ 0.0f, 0.0f, 10.0f }; // Camera position
+    // make floor camera
+   //camera.position = (Vector3){ 10.0f, 10.0f, 10.0f }; // Camera position
     camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };      // Camera looking at point
-    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
-    camera.fovy = 45.0f;                                // Camera field-of-view Y
-    camera.projection = CAMERA_PERSPECTIVE;             // Camera projection type
+    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector
+    camera.fovy = 45.0f;                                // Field-of-view
+    camera.projection = CAMERA_PERSPECTIVE;            // Perspective mode
 
     Vector3 cubePosition = { 0.0f, 0.0f, 0.0f };
 
-    DisableCursor();                    // Limit cursor to relative movement inside the window
+    DisableCursor();
+    SetTargetFPS(60);
 
-    SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
-
-    // Main game loop
-    while (!WindowShouldClose())        // Detect window close button or ESC key
+    while (!WindowShouldClose())
     {
-        // Update
-        //----------------------------------------------------------------------------------
         UpdateCamera(&camera, CAMERA_FREE);
 
-        if (IsKeyPressed('Z')) camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
-        //----------------------------------------------------------------------------------
+        if (IsKeyPressed(KEY_Z)) camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
 
-        // Draw
-        //----------------------------------------------------------------------------------
         BeginDrawing();
-
             ClearBackground(RAYWHITE);
-
+            
             BeginMode3D(camera);
-
-                DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
-                DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
-
+                //DrawColoredCube((Vector3){0.0f, 0.0f, 0.0f}, 2.0f);
+                DrawSolidColoredCube((Vector3){0.0f, 0.0f, 0.0f}, 2.0f);
                 DrawGrid(10, 1.0f);
-
             EndMode3D();
 
-            DrawRectangle( 10, 10, 320, 93, Fade(SKYBLUE, 0.5f));
-            DrawRectangleLines( 10, 10, 320, 93, RED);
+            // UI Background
+            DrawRectangle(10, 10, 300, 100, Fade(SKYBLUE, 0.5f));
+            DrawRectangleLines(10, 10, 300, 100, RED);
 
-            DrawText("Free camera default controls:", 20, 20, 10, BLACK);
-            DrawText("- Mouse Wheel to Zoom in-out", 40, 40, 10, DARKGRAY);
-            DrawText("- Mouse Wheel Pressed to Pan", 40, 60, 10, DARKGRAY);
-            DrawText("- Z to zoom to (0, 0, 0)", 40, 80, 10, DARKGRAY);
+            // Camera details
+            char buffer[128];
+            sprintf(buffer, "camera.position: (%.2f, %.2f, %.2f)", camera.position.x, camera.position.y, camera.position.z);
+            DrawText(buffer, 20, 20, 10, BLACK);
+
+            sprintf(buffer, "camera.target: (%.2f, %.2f, %.2f)", camera.target.x, camera.target.y, camera.target.z);
+            DrawText(buffer, 20, 35, 10, BLACK);
+
+            sprintf(buffer, "camera.up: (%.2f, %.2f, %.2f)", camera.up.x, camera.up.y, camera.up.z);
+            DrawText(buffer, 20, 50, 10, BLACK);
+
+            sprintf(buffer, "camera.fovy: %.2f", camera.fovy);
+            DrawText(buffer, 20, 65, 10, BLACK);
+
+            sprintf(buffer, "projection: %s", camera.projection == CAMERA_PERSPECTIVE ? "PERSPECTIVE" : "ORTHOGRAPHIC");
+            DrawText(buffer, 20, 80, 10, BLACK);
 
         EndDrawing();
-        //----------------------------------------------------------------------------------
     }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
+    CloseWindow();
 
     return 0;
 }

@@ -267,6 +267,9 @@ Camera field-of-view Y
 
 
 
+
+
+
 | Direction | X Change | Y Change | Z Change | New Position           |
 |-----------|----------|----------|----------|------------------------|
 | Front     | 0        | 0        | -5       | (10.0, 10.0, 5.0)      |
