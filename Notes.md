@@ -194,7 +194,7 @@ Matrix translationMatrix = {
 
 
 
-**module: rtextures **
+**module: rtextures**
 
 
 // Draw text (using default font) within an image (destination)
@@ -205,24 +205,41 @@ void ImageDrawText(Image *dst, const char *text, int posX, int posY, int fontSiz
 
 
 DrawText("Free camera default controls:", 20, 20, 10, BLACK);
+
 ```
 
 
 
 
 Draws a semi-transparent blue filled rectangle.
+
 ```
 DrawRectangle( 10, 120, 320, 93, Fade(BLUE, 0.5f));
+
 ```
 
 
 Draws a red outline around the same rectangle.
+
 ```
 DrawRectangleLines( 10, 120, 320, 93, RED);
-```          
+
+```
             
 
 
+**module rmodels**
+
+
+
+```
+// Draw a grid (centered at (0, 0, 0))
+
+void DrawGrid(int slices, float spacing);                                                          
+
+DrawGrid(10, 2.0f);
+
+```
 
 
 
@@ -231,13 +248,33 @@ DrawRectangleLines( 10, 120, 320, 93, RED);
 
 
 
+Plan_3d view to 2d camera view how work ???
 
 
 
 
+    Camera3D camera = { 0 };
+    camera.position = (Vector3){ 10.0f, 10.0f, 10.0f }; // Camera position
+    camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };      // Camera looking at point
+    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
+    camera.fovy = 45.0f;                                // Camera field-of-view Y
+    camera.projection = CAMERA_PERSPECTIVE;             // Camera projection type
+    
+    
+    
+
+Camera field-of-view Y
 
 
 
+| Direction | X Change | Y Change | Z Change | New Position           |
+|-----------|----------|----------|----------|------------------------|
+| Front     | 0        | 0        | -5       | (10.0, 10.0, 5.0)      |
+| Back      | 0        | 0        | +5       | (10.0, 10.0, 15.0)     |
+| Top       | 0        | +5       | 0        | (10.0, 15.0, 10.0)     |
+| Bottom    | 0        | -5       | 0        | (10.0, 5.0, 10.0)      |
+| Right     | +5       | 0        | 0        | (15.0, 10.0, 10.0)     |
+| Left      | -5       | 0        | 0        | (5.0, 10.0, 10.0)      |
 
 
 
