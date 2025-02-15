@@ -37,16 +37,14 @@ void DrawColoredCube(Vector3 position, float size) {
 }
 
 
-
-
 void DrawSolidColoredCube(Vector3 position, float size) {
     // Define colors for each face
-    Color frontColor = RED;
+    Color frontColor = GREEN;
     Color backColor = BLUE;
-    Color leftColor = GREEN;
-    Color rightColor = YELLOW;
-    Color topColor = WHITE;
-    Color bottomColor = ORANGE;
+    Color leftColor = RED; // chnage the color like cube
+    Color rightColor = ORANGE; //
+    Color topColor = GRAY; // GraY
+    Color bottomColor = YELLOW;
 
     // Draw the solid cube
     DrawCubeV(position, (Vector3){ size, size, size }, WHITE); // Base cube
@@ -75,8 +73,6 @@ void DrawSolidColoredCube(Vector3 position, float size) {
 
 
 
-
-
 int main(void)
 {
     const int screenWidth = 800;
@@ -84,14 +80,23 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - 3D camera free");
 
+    // Second Camera (Top View)
     Camera3D camera = { 0 };
-    camera.position = (Vector3){ 0.0f, 0.0f, 10.0f }; // Camera position
-    // make floor camera
-   //camera.position = (Vector3){ 10.0f, 10.0f, 10.0f }; // Camera position
+    camera.position = (Vector3){ 0.0f, 5.0f, 0.0f }; // Camera position
     camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };      // Camera looking at point
-    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector
+    camera.up = (Vector3){ 1.0f, 0.0f, 0.0f };          // Camera up vector
     camera.fovy = 45.0f;                                // Field-of-view
     camera.projection = CAMERA_PERSPECTIVE;            // Perspective mode
+
+    // Second Camera (Down View)
+    Camera3D camera2 = { 0 };
+    camera2.position = (Vector3){ 0.0f, -5.0f, 0.0f }; // Side view
+    camera2.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+    camera2.up = (Vector3){ 1.0f, 0.0f, 0.0f }; // FIXED
+    camera2.fovy = 45.0f;
+    camera2.projection = CAMERA_PERSPECTIVE;
+
+    int activeCamera = 2; // 1 = camera1, 2 = camera2
 
     Vector3 cubePosition = { 0.0f, 0.0f, 0.0f };
 
@@ -100,14 +105,18 @@ int main(void)
 
     while (!WindowShouldClose())
     {
-        UpdateCamera(&camera, CAMERA_FREE);
+        //UpdateCamera(&camera, CAMERA_FREE);
 
-        if (IsKeyPressed(KEY_Z)) camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+        //if (IsKeyPressed(KEY_Z)) camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+
+        if (IsKeyPressed(KEY_SPACE)) activeCamera = (activeCamera == 1) ? 2 : 1;
 
         BeginDrawing();
             ClearBackground(RAYWHITE);
             
-            BeginMode3D(camera);
+            //BeginMode3D(camera);
+            // Add one more camera
+            BeginMode3D(activeCamera == 1 ? camera : camera2);
                 //DrawColoredCube((Vector3){0.0f, 0.0f, 0.0f}, 2.0f);
                 DrawSolidColoredCube((Vector3){0.0f, 0.0f, 0.0f}, 2.0f);
                 DrawGrid(10, 1.0f);
