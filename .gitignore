@@ -2,15 +2,16 @@
 #*.[^/]*$
 
 # Ignore files without an extension in all subdirectories
-**/*.[^/]*$
+#**/*.[^/]*$
 
 # Ignore files without an extension
-**/*[^/]*
+#**/*[^/]*
 
 
 
 # Ignore the following directories
 help/build/
+raylib_build/Game_1/build/
 
 
 # Ignore object files (.o)
