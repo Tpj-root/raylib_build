@@ -269,22 +269,40 @@ Camera field-of-view Y
 
 camera.position = (10.0, 10.0, 10.0)
 
-
-
-
-    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f }; 
+camera.up = (Vector3){ 0.0f, 1.0f, 0.0f }; 
 
 
 | Direction | X Change | Y Change | Z Change | New Position           | camera.up |
 |-----------|----------|----------|----------|------------------------|-----------|
-| Front     | 0        | 0        | -5       | (10.0, 10.0, 5.0)      |0.0f, 1.0f, 0.0f |
-| Back      | 0        | 0        | +5       | (10.0, 10.0, 15.0)     |0.0f, 1.0f, 0.0f |
+| Front     | 0        | 0        | +5       | (10.0, 10.0, 10.0)      |0.0f, 1.0f, 0.0f |
+| Back      | 0        | 0        | -5       | (10.0, 10.0, 5.0)     |0.0f, 1.0f, 0.0f |
 | Top       | +5       | +5       | +5       | (15.0, 15.0, 15.0)     |0.0f, 1.0f, 0.0f |
 | Bottom    | +5       | -5       | +5       | (15.0, 5.0, 15.0)      |0.0f, 1.0f, 0.0f |
 | Left      | +5       | 0        | 0        | (15.0, 10.0, 10.0)     |0.0f, 1.0f, 0.0f |
 | Right     | -5       | 0        | 0        | (5.0, 10.0, 10.0)      |0.0f, 1.0f, 0.0f |
 
 
+Top and Bottom = isometric view 
+
+
+
+
+| Direction | X Change | Y Change | Z Change | New Position           | camera.up |
+|-----------|----------|----------|----------|------------------------|-----------|
+| Top       | +0       | +5       | +0       | (10.0, 15.0, 10.0)     |0.0f, 0.0f, 1.0f |
+| Bottom    | +0       | -5       | +0       | (10.0, 5.0, 10.0)      |0.0f, 0.0f, 1.0f |
+
+
+
+| Direction | X Change | Y Change  | Z Change | New Position          | camera.up       |
+|-----------|----------|-----------|----------|-----------------------|-----------------|
+| Top       | 0        | +5        | 0        | (10.0, 15.0, 10.0)    |1.0f, 0.0f, 0.0f |
+| Bottom    | 0        | -5        | 0        | (10.0, 5.0, 10.0)     |1.0f, 0.0f, 0.0f |
+
+
+
+
+CW VS CCW
 
 
 Position {0.0f, 5.0f, 0.0f} → Places the camera above the cube.
