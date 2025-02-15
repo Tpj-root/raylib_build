@@ -23,6 +23,7 @@ set(EXAMPLES
     core_3d_camera_free.cpp
     core_world_screen.c
     two_camera.cpp
+    sideByside.cpp
 )
 
 

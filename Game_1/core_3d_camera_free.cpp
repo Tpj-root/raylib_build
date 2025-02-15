@@ -72,6 +72,18 @@ void DrawSolidColoredCube(Vector3 position, float size) {
 }
 
 
+Camera3D InitCamera(Vector3 position, Vector3 target, Vector3 up, float fovy) {
+    Camera3D cam = { 0 };
+    cam.position = position;
+    cam.target = target;
+    cam.up = up;
+    cam.fovy = fovy;
+    cam.projection = CAMERA_PERSPECTIVE;
+    return cam;
+}
+
+
+
 
 int main(void)
 {
@@ -80,7 +92,7 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - 3D camera free");
 
-    // Second Camera (Top View)
+    // 1  Camera (Top View)
     Camera3D camera = { 0 };
     camera.position = (Vector3){ 0.0f, 5.0f, 0.0f }; // Camera position
     camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };      // Camera looking at point
@@ -88,15 +100,54 @@ int main(void)
     camera.fovy = 45.0f;                                // Field-of-view
     camera.projection = CAMERA_PERSPECTIVE;            // Perspective mode
 
-    // Second Camera (Down View)
+    // 2 Camera (Down View)
     Camera3D camera2 = { 0 };
-    camera2.position = (Vector3){ 0.0f, -5.0f, 0.0f }; // Side view
+    camera2.position = (Vector3){ 0.0f, -5.0f, 0.0f }; 
     camera2.target = (Vector3){ 0.0f, 0.0f, 0.0f };
-    camera2.up = (Vector3){ 1.0f, 0.0f, 0.0f }; // FIXED
+    camera2.up = (Vector3){ 1.0f, 0.0f, 0.0f };
     camera2.fovy = 45.0f;
     camera2.projection = CAMERA_PERSPECTIVE;
 
-    int activeCamera = 2; // 1 = camera1, 2 = camera2
+
+    // 3 Camera (Front View)
+    Camera3D camera3 = { 0 };
+    camera3.position = (Vector3){ 0.0f, 0.0f, 5.0f }; 
+    camera3.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+    camera3.up = (Vector3){ 0.0f, 1.0f, 0.0f }; 
+    camera3.fovy = 45.0f;
+    camera3.projection = CAMERA_PERSPECTIVE;
+
+
+    // 3 Camera (Back View)
+    Camera3D camera4 = { 0 };
+    camera4.position = (Vector3){ 0.0f, 0.0f, -5.0f }; 
+    camera4.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+    camera4.up = (Vector3){ 0.0f, 1.0f, 0.0f }; 
+    camera4.fovy = 45.0f;
+    camera4.projection = CAMERA_PERSPECTIVE;
+
+
+    // 3 Camera (Left View)
+    Camera3D camera5 = { 0 };
+    camera5.position = (Vector3){ 5.0f, 0.0f, 0.0f }; 
+    camera5.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+    camera5.up = (Vector3){ 0.0f, 1.0f, 0.0f }; 
+    camera5.fovy = 45.0f;
+    camera3.projection = CAMERA_PERSPECTIVE;
+
+
+    // 3 Camera (Right View)
+    Camera3D camera6 = { 0 };
+    camera6.position = (Vector3){ -5.0f, 0.0f, 0.0f }; 
+    camera6.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+    camera6.up = (Vector3){ 0.0f, 1.0f, 0.0f }; 
+    camera6.fovy = 45.0f;
+    camera6.projection = CAMERA_PERSPECTIVE;
+
+
+
+
+    int activeCamera = 1; // 1 = camera1, 2 = camera2
 
     Vector3 cubePosition = { 0.0f, 0.0f, 0.0f };
 
@@ -109,14 +160,23 @@ int main(void)
 
         //if (IsKeyPressed(KEY_Z)) camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
 
-        if (IsKeyPressed(KEY_SPACE)) activeCamera = (activeCamera == 1) ? 2 : 1;
+        if (IsKeyPressed(KEY_SPACE)) 
+        {
+            activeCamera++;
+            if (activeCamera > 6) activeCamera = 1; // Reset to 1 after 6
+        }
 
         BeginDrawing();
             ClearBackground(RAYWHITE);
             
             //BeginMode3D(camera);
             // Add one more camera
-            BeginMode3D(activeCamera == 1 ? camera : camera2);
+               BeginMode3D(activeCamera == 1 ? camera : 
+                           activeCamera == 2 ? camera2 : 
+                           activeCamera == 3 ? camera3 : 
+                           activeCamera == 4 ? camera4 : 
+                           activeCamera == 5 ? camera5 : 
+                                               camera6);
                 //DrawColoredCube((Vector3){0.0f, 0.0f, 0.0f}, 2.0f);
                 DrawSolidColoredCube((Vector3){0.0f, 0.0f, 0.0f}, 2.0f);
                 DrawGrid(10, 1.0f);
