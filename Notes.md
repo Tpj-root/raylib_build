@@ -267,17 +267,32 @@ Camera field-of-view Y
 
 
 
+camera.position = (10.0, 10.0, 10.0)
 
 
 
-| Direction | X Change | Y Change | Z Change | New Position           |
-|-----------|----------|----------|----------|------------------------|
-| Front     | 0        | 0        | -5       | (10.0, 10.0, 5.0)      |
-| Back      | 0        | 0        | +5       | (10.0, 10.0, 15.0)     |
-| Top       | 0        | +5       | 0        | (10.0, 15.0, 10.0)     |
-| Bottom    | 0        | -5       | 0        | (10.0, 5.0, 10.0)      |
-| Right     | +5       | 0        | 0        | (15.0, 10.0, 10.0)     |
-| Left      | -5       | 0        | 0        | (5.0, 10.0, 10.0)      |
+
+    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f }; 
+
+
+| Direction | X Change | Y Change | Z Change | New Position           | camera.up |
+|-----------|----------|----------|----------|------------------------|-----------|
+| Front     | 0        | 0        | -5       | (10.0, 10.0, 5.0)      |0.0f, 1.0f, 0.0f |
+| Back      | 0        | 0        | +5       | (10.0, 10.0, 15.0)     |0.0f, 1.0f, 0.0f |
+| Top       | +5       | +5       | +5       | (15.0, 15.0, 15.0)     |0.0f, 1.0f, 0.0f |
+| Bottom    | +5       | -5       | +5       | (15.0, 5.0, 15.0)      |0.0f, 1.0f, 0.0f |
+| Left      | +5       | 0        | 0        | (15.0, 10.0, 10.0)     |0.0f, 1.0f, 0.0f |
+| Right     | -5       | 0        | 0        | (5.0, 10.0, 10.0)      |0.0f, 1.0f, 0.0f |
+
+
+
+
+Position {0.0f, 5.0f, 0.0f} → Places the camera above the cube.
+Target {0.0f, 0.0f, 0.0f} → Keeps the cube centered.
+Up {0.0f, 0.0f, -1.0f} → Aligns the camera correctly for a top-down view.
+
+
+
 
 
 
