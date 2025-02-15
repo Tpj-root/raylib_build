@@ -197,14 +197,30 @@ Matrix translationMatrix = {
 **module: rtextures **
 
 
-void ImageDrawText(Image *dst, const char *text, int posX, int posY, int fontSize, Color color);
-
 // Draw text (using default font) within an image (destination)
 
 
+```
+void ImageDrawText(Image *dst, const char *text, int posX, int posY, int fontSize, Color color);
+
+
 DrawText("Free camera default controls:", 20, 20, 10, BLACK);
+```
 
 
+
+
+Draws a semi-transparent blue filled rectangle.
+```
+DrawRectangle( 10, 120, 320, 93, Fade(BLUE, 0.5f));
+```
+
+
+Draws a red outline around the same rectangle.
+```
+DrawRectangleLines( 10, 120, 320, 93, RED);
+```          
+            
 
 
 
