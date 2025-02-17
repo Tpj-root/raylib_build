@@ -413,3 +413,36 @@ For higher precision, use 16-bit grayscale (0–65535 levels).
 https://www.researchgate.net/publication/241680673_GPU-based_Conformal_Flow_on_Surfaces
 
 
+
+
+
+
+
+
+
+Plan mkae own camera postion
+
+
+
+
+        //UpdateCamera(&camera, CAMERA_FREE);
+        //UpdateCamera(&camera, CAMERA_THIRD_PERSON);   // best
+        //UpdateCamera(&camera, CAMERA_FIRST_PERSON);
+        //UpdateCamera(&camera, CAMERA_ORBITAL);
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
