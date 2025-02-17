@@ -19,7 +19,7 @@ set(RAYLIB_LIB_DIR "${LIB_HOME}/raylib/libraylib.a")
 
 # List of source files
 set(EXAMPLES
-    camera.cpp
+    main.cpp
 )
 
 
