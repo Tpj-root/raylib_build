@@ -477,3 +477,48 @@ Debug info
 
 
 
+
+
+The texture is 1024x768.
+Each small texture is 256x256.
+To calculate how many 256x256 sections can fit into a 1024x768 texture, divide the dimensions of the larger texture by the smaller texture:
+
+
+
+To calculate how many 256x256 sections can fit into a 1024x768 texture, divide the dimensions of the larger texture by the smaller texture:
+
+    Width: 1024 / 256 = 4 (so 4 textures fit along the width)
+    Height: 768 / 256 = 3 (so 3 textures fit along the height)
+
+
+
+
+
+
+
+
+
+
+
+
+float texX = 128.0f / 256;   // 0.5
+float texY = 128.0f / 256;   // 0.5
+
+
+
+float texX = 1 * 256.0f / texWidth;  // Column 2
+float texY = 1 * 256.0f / texHeight; // Row 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
