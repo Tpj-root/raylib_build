@@ -7,6 +7,23 @@ https://www.raylib.com/cheatsheet/cheatsheet.html
 
 
 
+
+Raylib uses a right-handed coordinate system for 3D space.
+
+the positive X-axis points right, 
+the positive Y-axis points upwards, and the positive Z-axis points towards the viewer when using the "right-hand rule."
+
+
+
+
+**`coordinate system for 3D space:`**
+
+![](img/Right-and-Left-Handed-Coordinate.png)
+
+
+
+
+
 # structs
 
 
@@ -434,6 +451,12 @@ Plan mkae own camera postion
 
 
 
+Timer
+
+```
+https://github.com/raysan5/raylib/wiki/Frequently-Asked-Questions
+
+```
 
 
 
@@ -441,6 +464,14 @@ Plan mkae own camera postion
 
 
 
+Debug info
+
+    //printf("position x: %.2f, position y: %.2f, position z: %.2f\n", x, y, z);
+    //printf("texWidth: %.2f, texHeight: %.2f", texWidth, texHeight);
+
+
+        rlColor4ub(color.r, color.g, color.b, color.a);
+        printf("color_r : %.2f,color_g: %.2f,color_b : %.2f,color_a: %.2f", color.r, color.g, color.b, color.a);
 
 
 
